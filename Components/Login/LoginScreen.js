@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
-import {Alert, View, TouchableOpacity} from 'react-native';
+import { View, TouchableOpacity} from 'react-native';
 import {TextInput, Text, Button} from 'react-native-paper';
-// import Icon from 'react-native-vector-icons/Fontisto';
+import showAlert from '../../Common/Sweetalert';
 import auth from '@react-native-firebase/auth';
 import Snackbar from 'react-native-paper';
 
@@ -11,7 +11,7 @@ const Login = ({navigation}) => {
   const [showpassword, setshowpassword] = useState(true);
 
   const SignInEmailPassword = async () => {
-    // const navigation = useNavigation();
+    
     try {
       if (email === '') {
         Snackbar.show({
@@ -31,31 +31,31 @@ const Login = ({navigation}) => {
       } else {
         console.log(email, password);
         await auth().signInWithEmailAndPassword(email, password);
-        Alert.alert('User signed in successfully!');
+       
+        showAlert('User', 'Signed Successfully');
         ({
           text: 'Login Successfully',
 
           backgroundColor: 'grey',
           textColor: 'white',
         });
-        console.log('kam ho gya');
+      
         console.log(navigation);
 
-        // await navigation.navigate("Home")
-        // await navigation.navigate("MyDrawer")
+        
         await navigation.navigate('drawer');
-        // Navigate to the next screen after successful login
-        // await navigation.navigate("NextScreen");
+        
         setEmail('');
         setPassword('');
       }
     } catch (error) {
       if (error.code === 'auth/user-not-found') {
-        console.log('No user with this email exists.');
+        showAlert('Error', 'No User with this email exists');
       } else if (error.code === 'auth/wrong-password') {
-        console.log('Incorrect password.');
+        
+        showAlert('Error', 'Incorrect password');
       } else if (error.code === 'auth/invalid-email') {
-        console.log('Invalid email address.');
+        showAlert('Error', 'Invalid email address');
       } else {
         console.error(error);
       }
@@ -75,16 +75,7 @@ const Login = ({navigation}) => {
           }}>
           Login Account
         </Text>
-        <Text
-          style={{
-            flex:0,
-            textAlign: 'center',
-            color: 'white',
-            fontSize: 20,
-            marginBottom: 95,
-          }}>
-          Login an existin account
-        </Text>
+       
       </View>
       <View
         style={{

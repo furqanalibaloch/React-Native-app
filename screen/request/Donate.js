@@ -1,9 +1,10 @@
 
 
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity,Alert } from 'react-native';
 import database from '@react-native-firebase/database';
 import firestore from '@react-native-firebase/firestore';
+import showAlert from '../../Common/Sweetalert';
 
 const Donate = () => {
   const [username, setUsername] = useState('');
@@ -22,6 +23,12 @@ const Donate = () => {
       details,
     };
 
+    if (!username || !email  || !contact ) {
+      Alert.alert('Validation Error', 'Please fill in all the required fields.');
+      return;
+    }
+
+    console.log('Form submitted successfully');
 
     let key = firestore().collection('user').doc().id;
     await database()
@@ -29,21 +36,14 @@ const Donate = () => {
       .set(obj)
       .then(() => {
         console.log('Data saved successfully.');
-        showAlert('Donate Data', 'Data Successfully Done',"success");
-        // Clear form fields and error message after successful submission
+        showAlert('Donate', 'Data Successfully Done',"success");
+       
         setUsername('');
         setEmail('');
         setContact('');
         setMoney('');
         setDetails('');
-        // navigation.push('Home')
-        ;});
-
-
-
-
-
-
+     ;});
   };
 
   return (
@@ -134,7 +134,8 @@ const Donate = () => {
         }}
         onPress={handleRequestSubmit}
       >
-        <Text style={{ color: 'white', fontSize: 18 }}>Donate now</Text>
+        <Text style={{ color: 'white', fontSize: 18 }}
+        >Donate now</Text>
       </TouchableOpacity>
     </View>
   );

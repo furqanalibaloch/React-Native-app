@@ -4,7 +4,7 @@ import {Text, View} from 'react-native';
 function Terms() {
   return (
     <>
-      <View style={{textAlign: 'center', flex: 1, justifyContent: 'center',backgroundColor:"green"}}>
+      <View style={{ flex: 1, justifyContent: 'center',backgroundColor:"green"}}>
         <Text
           style={{
             color: 'black',
@@ -19,10 +19,10 @@ function Terms() {
         <Text
           style={{
             color: 'black',
-            textAlign: 'start',
             paddingTop: 20,
             fontSize: 15,
             color:'white',
+            
           }}>
           As of my last knowledge update in January 2022, I don't have the
           specific terms and conditions of Saylani Welfare Trust. Organizations

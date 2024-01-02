@@ -2,7 +2,7 @@ import React from 'react';
 import {Text, View} from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 
-function Privacypolicy({Navigation}) {
+function Privacypolicy() {
   return (
     <>
     <ScrollView>
@@ -22,7 +22,6 @@ function Privacypolicy({Navigation}) {
         <Text
           style={{
             color: 'black',
-            textAlign: 'start',
             paddingTop: 20,
             fontSize: 15,
             color: 'white',

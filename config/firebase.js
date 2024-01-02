@@ -3,7 +3,7 @@ import { getAuth } from 'firebase/auth';
 import { getDatabase } from 'firebase/database';
 import { getStorage } from 'firebase/storage';
 
-// Your web app's Firebase configuration
+
 const firebaseConfig = {
     apiKey: "AIzaSyDldDLdmDPRJ9CS3NtgqbTI-8pjHugMW00",
     authDomain: "reactnativeapp-abaa3.firebaseapp.com",

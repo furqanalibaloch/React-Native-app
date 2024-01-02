@@ -13,18 +13,18 @@ import {db} from '../../config/firebase';
 import Heart from 'react-native-vector-icons/AntDesign';
 import Bookmark from 'react-native-vector-icons/FontAwesome';
 import Swiper from 'react-native-swiper'
-const { width } = Dimensions.get('window')
+const {width} = Dimensions.get('window')
 
 const images = [
     "https://res.cloudinary.com/saylani-welfare/image/upload/v1666591041/website-images/static/104.jpg",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcTXxHlFLXsjUyp_vTHZP2EYS5ou9Fm1CwCw&usqp=CAU",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2ExN4sk1N4L6i0xE83Kjo0Z1AZGCwzAlyZg&usqp=CAU"
+    "https://admissions.com.pk/wp-content/uploads/2023/10/Saylani-mass-it-training-program.jpg",
+    "https://res.cloudinary.com/saylani-welfare/image/upload/v1646497311/website-images/static/24.jpg"
 ]
 
 
 
 
-const Home = () => {
+const Home = ({navigation}) => {
   const [tableData, setTableData] = useState([]);
 
  
@@ -76,36 +76,47 @@ const Home = () => {
 
   return (
     <>
-      <View>
-        {/* <Image source={require('../../Assets/images/logo_saylani.png')} style={{width:100}} /> */}
-      </View>
      
-        
 
-   
       <ScrollView>
 
       <View style={styles.container}>
+                
                 <Swiper
-                    height={300}
-                    paginationStyle={false}
-                    pagingEnabled={false}
-                    
-                    
+                  dot={
+                    <View
+                        style={{
+                            backgroundColor: 'grey',
+                            width: 12,
+                            height: 12,
+                            borderRadius: 8,
+                            margin: 3
+
+                        }}
+                    />
+                }
+                activeDot={
+                    <View
+                        style={{
+                            backgroundColor: 'red',
+                            width: 12,
+                            height: 12,
+                            borderRadius: 8,
+                            margin: 3
+                        }}
+                    />
+                }
+                    height={600}
                     autoplay={true}
                     autoplayTimeout={5}
                 >
                     {
                         images.map((v, i) => {
-                            return (
-                              <View key={i}>
-                                <Image
-                            
-                            style={styles.image}
-                            source={{ uri: `${v}` }}
-                        />
-                              </View>
-                            )
+                            return <Image
+                                resizeMode="contain"
+                                style={styles.image}
+                                source={{ uri: v }}
+                            />
                         })
                     }
 
@@ -327,13 +338,14 @@ const styles = StyleSheet.create({
   },
 
   container: {
-    flex: 3,
-    height:250,
+    flex: 2,
+   
   },
   image: {
     width: 100+"%",
-    height: 300,
-    objectFit:"fill"
+    height: 200,
+    objectFit:"fill",
+    flex: 3,
   },
  
     text: {
@@ -341,11 +353,11 @@ const styles = StyleSheet.create({
         fontSize: 30,
         fontWeight: 'bold'
     },
-
-    image: {
-        width:100+"%",
-        flex: 1
+    image:{
+      width:"100%",
+      flex:1,
     }
+   
 }
 );
 

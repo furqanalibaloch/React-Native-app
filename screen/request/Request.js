@@ -1,20 +1,21 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, ScrollView,Alert } from 'react-native';
 import database from '@react-native-firebase/database';
 import firestore from '@react-native-firebase/firestore';
+import showAlert from '../../Common/Sweetalert';
 
-const Request = ({navigation}) => {
+const Request = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [contact, setContact] = useState('');
-  const [selectedOption, setSelectedOption] = useState('food');
+  const [selectedOption, setSelectedOption] = useState('');
   const [cnic, setCNIC] = useState('');
   const [details, setDetails] = useState('');
 
   const options = ['food', 'money', 'medical'];
 
   const handleRequestSubmit = async () => {
-    // Add your submit logic here
+    
     const obj = {
       username,
       email,
@@ -24,8 +25,13 @@ const Request = ({navigation}) => {
       details,
     };
 
-
-
+      if (!username || !email || !cnic || !contact || !selectedOption) {
+        Alert.alert('Validation Error', 'Please fill in all the required fields.');
+        return;
+      }
+  
+      console.log('Form submitted successfully');
+  
     let key = firestore().collection('user').doc().id;
     await database()
       .ref(`/users/request/${key}`)
@@ -34,19 +40,16 @@ const Request = ({navigation}) => {
         console.log('Data saved successfully.');
         showAlert('Request Data', 'Data Successfully Done',"success");
 
-        // Clear form fields and error message after successful submission
+       
         setUsername('');
         setEmail('');
         setContact('');
         setSelectedOption('');
         setCNIC('');
         setDetails('');
-        navigation.push('Home');});
+       ;});
 
-
-
-
-  };
+      };
 
   return (
     <ScrollView>

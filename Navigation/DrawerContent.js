@@ -19,17 +19,18 @@ var DrawerContentMain = [
     color: 'gray',
     path: 'About',
   },
-  {
-    name: 'user-plus',
-    title: 'Request',
-    color: 'gray',
-    path: 'Request',
-  },
+ 
   {
     name: 'video',
     title: 'Media',
     color: 'gray',
     path: 'Media',
+  },
+  {
+    name: 'user-plus',
+    title: 'Request',
+    color: 'gray',
+    path: 'Request',
   },
   {
     name: 'donate',

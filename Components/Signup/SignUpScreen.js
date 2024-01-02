@@ -1,15 +1,10 @@
 import React, {useState} from 'react';
-import {Alert, View, TouchableOpacity,Image} from 'react-native';
+import { View, TouchableOpacity,Image} from 'react-native';
 import {TextInput, Text, Button} from 'react-native-paper';
 import auth from '@react-native-firebase/auth';
 import Snackbar from 'react-native-snackbar';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import showAlert from '../../Common/Sweetalert';
-
-
-
-
-
 
 
 
@@ -55,7 +50,10 @@ const MyComponent = ({navigation}) => {
         backgroundColor: 'grey',
         textColor: 'red',
       });
-    } else if (password.length<8) {
+    } else if  (
+      /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/.test(password) ===
+      false
+    ) {
       Snackbar.show({
         text: 'Please Enter a valid password',
         duration: Snackbar.LENGTH_SHORT,
@@ -67,11 +65,13 @@ const MyComponent = ({navigation}) => {
       console.log(email);
       try {
         await auth().createUserWithEmailAndPassword(email, password);
-        Alert.alert('You have successfully created');
+      
+        showAlert('Accout', 'Successfully created');
         await navigation.navigate('Login');
       } catch (error) {
         if (error.code === 'auth/email-already-in-use') {
-          Alert.alert('Email Already Registered');
+          
+          showAlert('Email', 'Already',"Registrated");
         }
       }
     }
@@ -126,23 +126,15 @@ const MyComponent = ({navigation}) => {
             textAlign: 'center',
             color: 'white',
             fontSize: 40,
-            marginTop: 100,
+            marginTop: 80,
           }}>
-          Create Account
+          Create New Account
         </Text>
-        <Text
-        style={{
-          flex: 1,
-          textAlign: 'center',
-          color: 'white',
-          fontSize: 20,
-          marginTop: 0,
-        }}
-        >Create a new account.</Text>
+       
       </View>
       <View
         style={{
-          flex: 8,
+          flex: 6,
           backgroundColor: 'white',
           borderTopRightRadius: 30,
           borderTopLeftRadius: 30,
@@ -156,15 +148,13 @@ const MyComponent = ({navigation}) => {
           style={{
             backgroundColor: 'white',
             color: 'blue',
-            marginTop: 40,
+            marginTop: 20,
             marginHorizontal: 20,
           }}
           label="Username"
           left={<TextInput.Icon icon="mail" color={'gray'} />}
         />
-        {username ? (
-          <Text style={{color: 'red', marginLeft: 20}}>{username}</Text>
-        ) : null}
+       
 
         <TextInput
           onChangeText={e => setEmail(e)}
